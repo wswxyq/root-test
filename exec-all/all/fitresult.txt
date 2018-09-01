@@ -1,0 +1,15 @@
+Fitted number of events(DD): 395662
+Fitted number of events(LL): 959361
+Number of total entries in dataset(DD): 395662
+Number of total entries in dataset(LL): 959361
+signal yield(DD): 226757
+signal yield(LL): 166245
+background yield(DD): 168905
+background yield(LL): 793116
+=============================
+At(unblind): -0.087761
+At_bar(unblind): -0.03725
+At(blind): 0.00226891
+At_bar(blind): -0.00141825
+Acp_blind: 0.00184358 +/- 0.00204934
+fit status: 0

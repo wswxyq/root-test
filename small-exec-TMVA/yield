@@ -1,0 +1,21 @@
+D2KSPiPiPi_DD:
+signal: 41126.7
+background: 122502
+
+D2KSKpPiPi_DD:
+signal: 2030.99
+background: 35648.5
+
+
+D2KSPiPiPi_LL:
+signal: 21980.1
+background: 400535.
+
+D2KSKpPiPi_LL:
+signal: 1105.77
+background: 134890
+
+
+DD: 0.439746
+LL: 0.901139
+

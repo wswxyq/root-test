@@ -1,0 +1,11 @@
+Fitted number of events: 1971.31
+Number of total entries in dataset: 1971
+signal yield:943.108
+background yield:1028.2
+=============================
+At(unblind):0.032361
+At_bar(unblind):-0.0555107
+At(blind):0.122391
+At_bar(blind):-0.019679
+Acp_blind: 0.0710349 +/- 0.0368664
+fit status: 0

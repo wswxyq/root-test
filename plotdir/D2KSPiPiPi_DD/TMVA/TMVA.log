@@ -1,0 +1,243 @@
+DataSetInfo              : [dataset] : Added class "Signal"
+                         : Add Tree DecayTree of type Signal with 163629 events
+DataSetInfo              : [dataset] : Added class "Background"
+                         : Add Tree DecayTree of type Background with 163629 events
+Factory                  : Booking method: LikelihoodKDE
+                         :
+Factory                  : Booking method: Fisher
+                         :
+Factory                  : Booking method: BDT
+                         :
+DataSetFactory           : [dataset] : Number of events in input trees
+                         :
+                         :
+                         : Number of training and testing events
+                         : ---------------------------------------------------------------------------
+                         : Signal     -- training events            : 81814
+                         : Signal     -- testing events             : 81814
+                         : Signal     -- training and testing events: 163628
+                         : Background -- training events            : 81814
+                         : Background -- testing events             : 81814
+                         : Background -- training and testing events: 163628
+                         :
+Factory                  : Train all methods
+Factory                  : [dataset] : Create Transformation "I" with events from all classes.
+                         :
+                         : Transformation, Variable selection :
+                         : Input : variable 'D_PT' <---> Output : variable 'D_PT'
+                         : Input : variable 'P0_ProbNNpi' <---> Output : variable 'P0_ProbNNpi'
+                         : Input : variable 'P1_ProbNNpi' <---> Output : variable 'P1_ProbNNpi'
+                         : Input : variable 'P2_ProbNNpi' <---> Output : variable 'P2_ProbNNpi'
+                         : Input : variable 'D_ReFit_chi2' <---> Output : variable 'D_ReFit_chi2'
+                         : Input : variable 'D_ReFit_KS0_M' <---> Output : variable 'D_ReFit_KS0_M'
+                         : Input : variable 'var1' <---> Output : variable 'var1'
+                         : Input : variable 'var2' <---> Output : variable 'var2'
+TFHandler_Factory        :      Variable             Mean             RMS     [        Min             Max ]
+                         : ------------------------------------------------------------------------------------
+                         :          D_PT:         8342.1         3955.8   [         2012.9         61134. ]
+                         :   P0_ProbNNpi:        0.86227        0.21862   [     3.4924e-05        0.99952 ]
+                         :   P1_ProbNNpi:        0.86218        0.21783   [     2.6450e-05        0.99950 ]
+                         :   P2_ProbNNpi:        0.86747        0.20983   [     0.00022358        0.99957 ]
+                         :  D_ReFit_chi2:         120.16         511.78   [        0.26376         35123. ]
+                         : D_ReFit_KS0_M:         496.72         13.666   [        -97.144         2232.2 ]
+                         :          var1:         45.085         59.764   [        -32.624         1405.6 ]
+                         :          var2:         2.0041         2.3570   [        -11.606         10.145 ]
+                         : ------------------------------------------------------------------------------------
+                         : Ranking input variables (method unspecific)...
+IdTransformation         : Ranking result (top variable is best ranked)
+                         : --------------------------------------
+                         : Rank : Variable      : Separation
+                         : --------------------------------------
+                         :    1 : var2          : 4.729e-01
+                         :    2 : D_ReFit_chi2  : 1.290e-01
+                         :    3 : D_ReFit_KS0_M : 9.206e-02
+                         :    4 : P0_ProbNNpi   : 6.160e-02
+                         :    5 : P1_ProbNNpi   : 6.157e-02
+                         :    6 : P2_ProbNNpi   : 4.903e-02
+                         :    7 : var1          : 3.339e-02
+                         :    8 : D_PT          : 3.071e-02
+                         : --------------------------------------
+Factory                  : Train method: LikelihoodKDE for Classification
+                         :
+                         : Filling reference histograms
+                         : Building PDF out of reference histograms
+                         : Elapsed time for training with 163628 events: 221 sec
+LikelihoodKDE            : [dataset] : Evaluation of LikelihoodKDE on training sample (163628 events)
+                         : Elapsed time for evaluation of 163628 events: 0.258 sec
+                         : Creating xml weight file: dataset/weights/TMVAClassification_LikelihoodKDE.weights.xml
+                         : Creating standalone class: dataset/weights/TMVAClassification_LikelihoodKDE.class.C
+                         : ../plotdir/D2KSPiPiPi_DD/TMVA/TMVA_refine_1.root:/dataset/Method_LikelihoodKDE/LikelihoodKDE
+Factory                  : Training finished
+                         :
+Factory                  : Train method: Fisher for Classification
+                         :
+Fisher                   : Results for Fisher coefficients:
+                         : -----------------------------
+                         :      Variable:   Coefficient:
+                         : -----------------------------
+                         :          D_PT:        +0.000
+                         :   P0_ProbNNpi:        +0.454
+                         :   P1_ProbNNpi:        +0.494
+                         :   P2_ProbNNpi:        +0.403
+                         :  D_ReFit_chi2:        +0.000
+                         : D_ReFit_KS0_M:        +0.003
+                         :          var1:        +0.003
+                         :          var2:        -0.250
+                         :      (offset):        -2.425
+                         : -----------------------------
+                         : Elapsed time for training with 163628 events: 0.172 sec
+Fisher                   : [dataset] : Evaluation of Fisher on training sample (163628 events)
+                         : Elapsed time for evaluation of 163628 events: 0.0271 sec
+                         : <CreateMVAPdfs> Separation from histogram (PDF): 0.542 (0.000)
+                         : Dataset[dataset] : Evaluation of Fisher on training sample
+                         : Creating xml weight file: dataset/weights/TMVAClassification_Fisher.weights.xml
+                         : Creating standalone class: dataset/weights/TMVAClassification_Fisher.class.C
+Factory                  : Training finished
+                         :
+Factory                  : Train method: BDT for Classification
+                         :
+<WARNING>                : Events with negative event weights are USED during the BDT training. This might cause problems with small node sizes or with the boosting. Please remove negative events from training using the option *IgnoreEventsWithNegWeightsInTraining* in case you observe problems with the boosting
+BDT                      : #events: (reweighted) sig: 81814 bkg: 81814
+                         : #events: (unweighted) sig: 81814 bkg: 81814
+                         : Training 200 Decision Trees ... patience please
+                         : Elapsed time for training with 163628 events: 7.42 sec
+BDT                      : [dataset] : Evaluation of BDT on training sample (163628 events)
+                         : Elapsed time for evaluation of 163628 events: 0.993 sec
+                         : Creating xml weight file: dataset/weights/TMVAClassification_BDT.weights.xml
+                         : Creating standalone class: dataset/weights/TMVAClassification_BDT.class.C
+                         : ../plotdir/D2KSPiPiPi_DD/TMVA/TMVA_refine_1.root:/dataset/Method_BDT/BDT
+Factory                  : Training finished
+                         :
+                         : Ranking input variables (method specific)...
+LikelihoodKDE            : Ranking result (top variable is best ranked)
+                         : --------------------------------------------
+                         : Rank : Variable      : Delta Separation
+                         : --------------------------------------------
+                         :    1 : var2          : 2.502e-02
+                         :    2 : P2_ProbNNpi   : 2.187e-02
+                         :    3 : P1_ProbNNpi   : 1.969e-02
+                         :    4 : D_PT          : -5.507e-02
+                         :    5 : P0_ProbNNpi   : -6.955e-02
+                         :    6 : D_ReFit_chi2  : -2.799e-01
+                         :    7 : var1          : -2.988e-01
+                         :    8 : D_ReFit_KS0_M : -3.982e-01
+                         : --------------------------------------------
+Fisher                   : Ranking result (top variable is best ranked)
+                         : ----------------------------------------
+                         : Rank : Variable      : Discr. power
+                         : ----------------------------------------
+                         :    1 : var2          : 2.374e-01
+                         :    2 : P1_ProbNNpi   : 2.909e-02
+                         :    3 : P0_ProbNNpi   : 2.796e-02
+                         :    4 : P2_ProbNNpi   : 2.204e-02
+                         :    5 : D_ReFit_chi2  : 1.802e-02
+                         :    6 : D_PT          : 9.955e-03
+                         :    7 : D_ReFit_KS0_M : 3.612e-03
+                         :    8 : var1          : 1.130e-05
+                         : ----------------------------------------
+BDT                      : Ranking result (top variable is best ranked)
+                         : -----------------------------------------------
+                         : Rank : Variable      : Variable Importance
+                         : -----------------------------------------------
+                         :    1 : var2          : 2.923e-01
+                         :    2 : var1          : 1.623e-01
+                         :    3 : D_ReFit_KS0_M : 1.208e-01
+                         :    4 : D_ReFit_chi2  : 1.099e-01
+                         :    5 : P1_ProbNNpi   : 9.157e-02
+                         :    6 : P0_ProbNNpi   : 8.199e-02
+                         :    7 : P2_ProbNNpi   : 7.761e-02
+                         :    8 : D_PT          : 6.353e-02
+                         : -----------------------------------------------
+Factory                  : === Destroy and recreate all methods via weight files for testing ===
+                         :
+                         : Reading weight file: dataset/weights/TMVAClassification_LikelihoodKDE.weights.xml
+                         : Reading weight file: dataset/weights/TMVAClassification_Fisher.weights.xml
+                         : Reading weight file: dataset/weights/TMVAClassification_BDT.weights.xml
+Factory                  : Test all methods
+Factory                  : Test method: LikelihoodKDE for Classification performance
+                         :
+LikelihoodKDE            : [dataset] : Evaluation of LikelihoodKDE on testing sample (163628 events)
+                         : Elapsed time for evaluation of 163628 events: 0.204 sec
+Factory                  : Test method: Fisher for Classification performance
+                         :
+Fisher                   : [dataset] : Evaluation of Fisher on testing sample (163628 events)
+                         : Elapsed time for evaluation of 163628 events: 0.0251 sec
+                         : Dataset[dataset] : Evaluation of Fisher on testing sample
+Factory                  : Test method: BDT for Classification performance
+                         :
+BDT                      : [dataset] : Evaluation of BDT on testing sample (163628 events)
+                         : Elapsed time for evaluation of 163628 events: 0.868 sec
+Factory                  : Evaluate all methods
+Factory                  : Evaluate classifier: LikelihoodKDE
+                         :
+LikelihoodKDE            : [dataset] : Loop over test events and fill histograms with classifier response...
+                         :
+TFHandler_LikelihoodKDE  :      Variable             Mean             RMS     [        Min             Max ]
+                         : ------------------------------------------------------------------------------------
+                         :          D_PT:         8049.0         3893.1   [         2031.0         61799. ]
+                         :   P0_ProbNNpi:        0.83637        0.23790   [     3.4924e-05        0.99952 ]
+                         :   P1_ProbNNpi:        0.83487        0.24017   [     2.6450e-05        0.99950 ]
+                         :   P2_ProbNNpi:        0.84643        0.22719   [     6.6109e-05        0.99970 ]
+                         :  D_ReFit_chi2:         169.18         637.26   [        0.26376         35123. ]
+                         : D_ReFit_KS0_M:         496.41         18.869   [        -741.81         2232.2 ]
+                         :          var1:         45.503         64.960   [        -32.624         1405.6 ]
+                         :          var2:         2.7363         2.3059   [        -10.353         10.126 ]
+                         : ------------------------------------------------------------------------------------
+Factory                  : Evaluate classifier: Fisher
+                         :
+Fisher                   : [dataset] : Loop over test events and fill histograms with classifier response...
+                         :
+                         : Also filling probability and rarity histograms (on request)...
+TFHandler_Fisher         :      Variable             Mean             RMS     [        Min             Max ]
+                         : ------------------------------------------------------------------------------------
+                         :          D_PT:         8049.0         3893.1   [         2031.0         61799. ]
+                         :   P0_ProbNNpi:        0.83637        0.23790   [     3.4924e-05        0.99952 ]
+                         :   P1_ProbNNpi:        0.83487        0.24017   [     2.6450e-05        0.99950 ]
+                         :   P2_ProbNNpi:        0.84643        0.22719   [     6.6109e-05        0.99970 ]
+                         :  D_ReFit_chi2:         169.18         637.26   [        0.26376         35123. ]
+                         : D_ReFit_KS0_M:         496.41         18.869   [        -741.81         2232.2 ]
+                         :          var1:         45.503         64.960   [        -32.624         1405.6 ]
+                         :          var2:         2.7363         2.3059   [        -10.353         10.126 ]
+                         : ------------------------------------------------------------------------------------
+Factory                  : Evaluate classifier: BDT
+                         :
+BDT                      : [dataset] : Loop over test events and fill histograms with classifier response...
+                         :
+TFHandler_BDT            :      Variable             Mean             RMS     [        Min             Max ]
+                         : ------------------------------------------------------------------------------------
+                         :          D_PT:         8049.0         3893.1   [         2031.0         61799. ]
+                         :   P0_ProbNNpi:        0.83637        0.23790   [     3.4924e-05        0.99952 ]
+                         :   P1_ProbNNpi:        0.83487        0.24017   [     2.6450e-05        0.99950 ]
+                         :   P2_ProbNNpi:        0.84643        0.22719   [     6.6109e-05        0.99970 ]
+                         :  D_ReFit_chi2:         169.18         637.26   [        0.26376         35123. ]
+                         : D_ReFit_KS0_M:         496.41         18.869   [        -741.81         2232.2 ]
+                         :          var1:         45.503         64.960   [        -32.624         1405.6 ]
+                         :          var2:         2.7363         2.3059   [        -10.353         10.126 ]
+                         : ------------------------------------------------------------------------------------
+                         :
+                         : Evaluation results ranked by best signal efficiency and purity (area)
+                         : -------------------------------------------------------------------------------------------------------------------
+                         : DataSet       MVA
+                         : Name:         Method:          ROC-integ
+                         : dataset       BDT            : 0.937
+                         : dataset       Fisher         : 0.909
+                         : dataset       LikelihoodKDE  : 0.852
+                         : -------------------------------------------------------------------------------------------------------------------
+                         :
+                         : Testing efficiency compared to training efficiency (overtraining check)
+                         : -------------------------------------------------------------------------------------------------------------------
+                         : DataSet              MVA              Signal efficiency: from test sample (from training sample)
+                         : Name:                Method:          @B=0.01             @B=0.10            @B=0.30
+                         : -------------------------------------------------------------------------------------------------------------------
+                         : dataset              BDT            : 0.527 (0.533)       0.828 (0.831)      0.939 (0.939)
+                         : dataset              Fisher         : 0.183 (0.173)       0.748 (0.748)      0.933 (0.933)
+                         : dataset              LikelihoodKDE  : 0.039 (0.040)       0.549 (0.561)      0.896 (0.896)
+                         : -------------------------------------------------------------------------------------------------------------------
+                         :
+Dataset:dataset          : Created tree 'TestTree' with 163628 events
+                         :
+Dataset:dataset          : Created tree 'TrainTree' with 163628 events
+                         :
+Factory                  : Thank you for using TMVA!
+                         : For citation information, please visit: http://tmva.sf.net/citeTMVA.html
+Info in <TCanvas::Print>: pdf file ../plotdir/D2KSPiPiPi_DD/TMVA_out_DD.pdf has been created

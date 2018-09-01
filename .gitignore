@@ -1,0 +1,13 @@
+*.root
+*.pdf
+*.o
+*.class.C
+*.xml
+bin/
+main
+*png
+*eps
+*esp
+exec-all/DD/*.txt
+exec-all/LL/*.txt
+exec-subtrx/subtrx

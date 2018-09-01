@@ -1,0 +1,4 @@
+DOBJ=../obj
+DBIN=../bin
+DEXE=../exec
+#VPATH = $(DBIN):$(DOBJ):$(DEXE)
