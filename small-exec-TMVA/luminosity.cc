@@ -4,12 +4,12 @@
 //#include "ofstream.h"
 
 
-void luminosity(){
+void luminosity() {
     const char* TChain_name="GetIntegratedLuminosity/LumiTuple";
-	const char* TChain_file="/eos/lhcb/user/m/mamartin/D2Kshhh/Test/MD/*.root";
-	//const char* TChain_file="../../root_data/DV*.root";
-	TChain *chain= new TChain(TChain_name);
-	chain->Add(TChain_file);
+    const char* TChain_file="/eos/lhcb/user/m/mamartin/D2Kshhh/Test/MD/*.root";
+    //const char* TChain_file="../../root_data/DV*.root";
+    TChain *chain= new TChain(TChain_name);
+    chain->Add(TChain_file);
     Long64_t numentries= chain->GetEntries();
     Double_t lmn, sum_lmn=0;
     chain->SetBranchAddress("IntegratedLuminosity", &lmn);

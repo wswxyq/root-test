@@ -28,7 +28,7 @@ void TMVA_GetResponse_DD_x()
 
     //set origin file used to train
     TString fname = "../saved/TMVA_root_files/reduced_DD_2.root";
-    TFile * input = new TFile( fname ); 
+    TFile * input = new TFile( fname );
 
 
     Float_t var[8];
@@ -40,7 +40,7 @@ void TMVA_GetResponse_DD_x()
     reader->AddVariable( "D_ReFit_chi2", &var[4] );
     reader->AddVariable( "KS_PT", &var[5] );
     reader->AddVariable( "var1:=D_ReFit_decayLength/D_ReFit_decayLengthErr", &var[6] );
-	reader->AddVariable( "var2:=log(D_IPCHI2_OWNPV)", &var[7] );	
+    reader->AddVariable( "var2:=log(D_IPCHI2_OWNPV)", &var[7] );
 
 
     // Book the MVA methods
@@ -62,7 +62,7 @@ void TMVA_GetResponse_DD_x()
     // output files
     TFile *target  = new TFile( "../saved/TMVA_root_files/TMVApp_DDx.root","RECREATE" );
     TTree *tree = theTree->CopyTree("");
-    
+
     Double_t BDT_response;
     TBranch *BDT_response_branch = tree->Branch("BDT_response", &BDT_response, "BDT_response/D");
     Double_t Ct;
@@ -72,7 +72,7 @@ void TMVA_GetResponse_DD_x()
     Float_t userVarf[8];
 
     Double_t P0_array[3], P1_array[3], P2_array[3];
-    
+
     Int_t id_temp;
     TVector3 v1, v2, v3;
 
@@ -84,27 +84,27 @@ void TMVA_GetResponse_DD_x()
     theTree->SetBranchAddress( "KS_PT", &userVarf[1] );
     theTree->SetBranchAddress( "D_ReFit_decayLength", &userVarf[2] );
     theTree->SetBranchAddress( "D_ReFit_decayLengthErr", &userVarf[3] );
-	theTree->SetBranchAddress( "D_IPCHI2_OWNPV", &userVard[4] );	
+    theTree->SetBranchAddress( "D_IPCHI2_OWNPV", &userVard[4] );
 
-	theTree->SetBranchAddress( "P0_ID", &id_temp );	
-	theTree->SetBranchAddress( "P0_PX", &P0_array[0] );	
-	theTree->SetBranchAddress( "P0_PY", &P0_array[1] );	
-	theTree->SetBranchAddress( "P0_PZ", &P0_array[2] );	
-	theTree->SetBranchAddress( "P1_PX", &P1_array[0] );	
-	theTree->SetBranchAddress( "P1_PY", &P1_array[1] );	
-	theTree->SetBranchAddress( "P1_PZ", &P1_array[2] );	
-	theTree->SetBranchAddress( "P2_PX", &P2_array[0] );	
-	theTree->SetBranchAddress( "P2_PY", &P2_array[1] );	
-	theTree->SetBranchAddress( "P2_PZ", &P2_array[2] );	
+    theTree->SetBranchAddress( "P0_ID", &id_temp );
+    theTree->SetBranchAddress( "P0_PX", &P0_array[0] );
+    theTree->SetBranchAddress( "P0_PY", &P0_array[1] );
+    theTree->SetBranchAddress( "P0_PZ", &P0_array[2] );
+    theTree->SetBranchAddress( "P1_PX", &P1_array[0] );
+    theTree->SetBranchAddress( "P1_PY", &P1_array[1] );
+    theTree->SetBranchAddress( "P1_PZ", &P1_array[2] );
+    theTree->SetBranchAddress( "P2_PX", &P2_array[0] );
+    theTree->SetBranchAddress( "P2_PY", &P2_array[1] );
+    theTree->SetBranchAddress( "P2_PZ", &P2_array[2] );
 
-    
+
     TStopwatch sw;
     sw.Start();
-    for (Long64_t ievt=0; ievt<theTree->GetEntries();ievt++) {
+    for (Long64_t ievt=0; ievt<theTree->GetEntries(); ievt++) {
         //if (ievt%1000 == 0) std::cout << "--- ... Processing event: " << ievt << std::endl;
-        
 
-        
+
+
         theTree->GetEntry(ievt);
         var[0]=userVard[0];
         var[1]=userVard[1];
@@ -131,13 +131,14 @@ void TMVA_GetResponse_DD_x()
 
         }
 
-        
+
     }
     cout    << "Number of event after cut "<<  tree->GetEntries("BDT_response>0.2433")  << endl;
 
     // Get elapsed time
     sw.Stop();
-    std::cout << "--- End of event loop: "; sw.Print();
+    std::cout << "--- End of event loop: ";
+    sw.Print();
 
 
     target->cd();
@@ -146,7 +147,7 @@ void TMVA_GetResponse_DD_x()
 
 
     //calculate significance
-    
+
     Double_t cut_up=tree->GetMaximum("BDT_response");
     Double_t cut_down=tree->GetMinimum("BDT_response");
 
@@ -166,11 +167,11 @@ void TMVA_GetResponse_DD_x()
 
         sum_bweight=0.;
         sum_sweight=0.;
-            
+
         for(Long64_t ii = 0; ii < tree->GetEntries(); ii++)
         {
             tree->GetEntry(ii);
-            if(BDT_response>=cut_value[i]){
+            if(BDT_response>=cut_value[i]) {
                 sum_sweight+=readsweight;
                 sum_bweight+=readbweight;
             }
@@ -180,9 +181,9 @@ void TMVA_GetResponse_DD_x()
 
         //std::cout<<cut_value[i]<<"   "<<sum_sweight<<"   "<<sum_bweight
         //<<" "<<significance_value[i]<<std::endl;
-        
+
     }
-    
+
     TCanvas *c1 = new TCanvas("c1","A Simple Graph Example",200,10,700,500);
     c1->SetFillColor(42);
     c1->SetGrid();
@@ -211,8 +212,8 @@ void TMVA_GetResponse_DD_x()
     Double_t bestcut;
     bestcut=cut_value[distance(significance_value, max_element(significance_value, significance_value + num_cut))];
     cout    << "The best BDT cut value: "<<  bestcut  << endl;
-	
 
 
-    }
+
+}
 

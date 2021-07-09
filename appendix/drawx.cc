@@ -1,4 +1,4 @@
-#include <iostream> 
+#include <iostream>
 #include "TROOT.h"
 #include "TCanvas.h"
 #include "TH1.h"
@@ -9,7 +9,7 @@
 
 using namespace std;
 
-void drawx(){
+void drawx() {
     //gStyle->SetOptStat(mode);
     const char* Tree_before_cut="ReducedTree";
     const char* Tree_after_cut="MVATree";
@@ -29,15 +29,15 @@ void drawx(){
     Double_t low=1799.65;
     Double_t up=1939.65;
 
-	TH1F *h1 = new TH1F("h1", "D_M", 50, low, up);
-	TH1F *h2 = new TH1F("h2", "D_M", 50, low, up);
-	TH1F *h3 = new TH1F("h3", "D_M", 50, low, up);
-	TH1F *h4 = new TH1F("h4", "D_M", 50, low, up);
+    TH1F *h1 = new TH1F("h1", "D_M", 50, low, up);
+    TH1F *h2 = new TH1F("h2", "D_M", 50, low, up);
+    TH1F *h3 = new TH1F("h3", "D_M", 50, low, up);
+    TH1F *h4 = new TH1F("h4", "D_M", 50, low, up);
 
 
-	//this fills the histogram h*_D_PT with variable D_PT
+    //this fills the histogram h*_D_PT with variable D_PT
 
-	TCanvas *c1 = new TCanvas( "c1", "D_M", 200, 10, 700, 500 );
+    TCanvas *c1 = new TCanvas( "c1", "D_M", 200, 10, 700, 500 );
     chain_DD_before->SetFillColor(8);
     chain_DD_after->SetFillColor(4);
     chain_DD_before->SetFillStyle(3005);
@@ -47,7 +47,7 @@ void drawx(){
     c1->Print("DD.png");
 
 
-	TCanvas *c2 = new TCanvas( "c2", "D_M", 200, 10, 700, 500 );
+    TCanvas *c2 = new TCanvas( "c2", "D_M", 200, 10, 700, 500 );
     chain_LL_before->SetFillColor(8);
     chain_LL_after->SetFillColor(4);
     chain_LL_before->SetFillStyle(3005);
@@ -56,11 +56,11 @@ void drawx(){
     chain_LL_after->Draw("D_M","","same");
     c2->Print("LL.png");
 
-    
-	delete h1; 
-	delete h2;
-	delete h3;
-	delete h4;
+
+    delete h1;
+    delete h2;
+    delete h3;
+    delete h4;
 
 
 

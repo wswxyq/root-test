@@ -1,4 +1,4 @@
-#include <iostream> 
+#include <iostream>
 #include "TMVA/mvas.h"
 void extra_TMVA_kfolder_anlys()
 {

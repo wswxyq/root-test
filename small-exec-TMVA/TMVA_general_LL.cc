@@ -1,6 +1,6 @@
 //train model with s-weight using NDT method
 //result stored in file TMVA_refine_*.root and folder named after tree name
-#include <iostream> 
+#include <iostream>
 #include "TROOT.h"
 #include "TChain.h"
 #include "TFile.h"
@@ -14,7 +14,7 @@ void TMVA_general_LL()
     TMVA::Tools::Instance();
     auto outputFile = TFile::Open("../plotdir/D2KSPiPiPi_LL/TMVA/TMVA_refine_LL_1.root", "RECREATE");
     TMVA::Factory factory("TMVAClassification", outputFile,
-"!V:ROC:!Silent:Color:!DrawProgressBar:AnalysisType=Classification" );
+                          "!V:ROC:!Silent:Color:!DrawProgressBar:AnalysisType=Classification" );
 
     //Define input variables
     TMVA::DataLoader * loader = new TMVA::DataLoader("D2KSPiPiPi_LL");
@@ -25,7 +25,7 @@ void TMVA_general_LL()
     loader->AddVariable( "D_ReFit_chi2", 'F' );
     loader->AddVariable( "KS_PT", 'F' );
     loader->AddVariable( "var1:=D_ReFit_decayLength/D_ReFit_decayLengthErr", 'F' );
-	loader->AddVariable( "var2:=log(D_IPCHI2_OWNPV)",'F');	
+    loader->AddVariable( "var2:=log(D_IPCHI2_OWNPV)",'F');
 
 
     //Setup input Dataset
@@ -49,24 +49,24 @@ void TMVA_general_LL()
     //TCut mycut_background = "KS_PT>-10000000";
     TCut mycut_background = "";
     loader->PrepareTrainingAndTestTree( mycut_signal, mycut_background,
-"nTrain_Signal=0:nTrain_Background=0:SplitMode=Random:NormMode=NumEvents:!V" );
+                                        "nTrain_Signal=0:nTrain_Background=0:SplitMode=Random:NormMode=NumEvents:!V" );
 
     /*
     // Use a kernel density estimator to approximate the PDFs
     factory.BookMethod(loader, TMVA::Types::kLikelihood, "LikelihoodKDE",
-"!H:!V:!TransformOutput:PDFInterpol=KDE:KDEtype=Gauss:KDEiter=Adaptive:KDEFineFactor=0.3:\
-KDEborder=None:NAvEvtPerBin=50" ); 
+    "!H:!V:!TransformOutput:PDFInterpol=KDE:KDEtype=Gauss:KDEiter=Adaptive:KDEFineFactor=0.3:\
+    KDEborder=None:NAvEvtPerBin=50" );
 
     // Fisher discriminant (same as LD)
     factory.BookMethod(loader, TMVA::Types::kFisher, "Fisher", "!H:!V:Fisher:VarTransform=None:\
-CreateMVAPdfs:PDFInterpolMVAPdf=Spline2:NbinsMVAPdf=50:NsmoothMVAPdf=10" );
+    CreateMVAPdfs:PDFInterpolMVAPdf=Spline2:NbinsMVAPdf=50:NsmoothMVAPdf=10" );
 
     */
     //Multi-Layer Perceptron (Neural Network)
     /*factory.BookMethod(loader, TMVA::Types::kMLP, "MLP",
-"!H:!V:NeuronType=tanh:VarTransform=N:NCycles=100:HiddenLayers=N+5:TestRate=5:!UseRegulator" ); */
+    "!H:!V:NeuronType=tanh:VarTransform=N:NCycles=100:HiddenLayers=N+5:TestRate=5:!UseRegulator" ); */
 
-    
+
     factory.BookMethod(loader,TMVA::Types::kBDT, "BDT","!V:NTrees=50:MinNodeSize=2.5%:MaxDepth=2:BoostType=AdaBoost:\
 AdaBoostBeta=0.5:UseBaggedBoost:BaggedSampleFraction=0.5:SeparationType=GiniIndex:nCuts=10" );
 
@@ -76,7 +76,7 @@ AdaBoostBeta=0.5:UseBaggedBoost:BaggedSampleFraction=0.5:SeparationType=GiniInde
 
     auto c1 = factory.GetROCCurve(loader);
     c1->Draw();
-	c1->Print("../plotdir/D2KSPiPiPi_LL/TMVA_out_LL.pdf");
+    c1->Print("../plotdir/D2KSPiPiPi_LL/TMVA_out_LL.pdf");
 
     outputFile->Close();
 }

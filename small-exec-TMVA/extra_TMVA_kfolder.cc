@@ -1,4 +1,4 @@
-#include <iostream> 
+#include <iostream>
 #include "TROOT.h"
 #include "TChain.h"
 #include "TFile.h"
@@ -26,7 +26,7 @@ void extra_TMVA_kfolder()
     loader->AddVariable( "D_ReFit_chi2", 'F' );
     //loader->AddVariable( "KS_PT", 'F' );
     loader->AddVariable( "var1:=D_ReFit_decayLength/D_ReFit_decayLengthErr", 'F' );
-	loader->AddVariable( "var2:=log(D_IPCHI2_OWNPV)",'F');	
+    loader->AddVariable( "var2:=log(D_IPCHI2_OWNPV)",'F');
 
     TTree *signalTree     = (TTree*)inputFile->Get("ReducedTree");
     TTree *backgroundTree = (TTree*)inputFile->Get("ReducedTree");
@@ -45,10 +45,10 @@ void extra_TMVA_kfolder()
     TCut mycut_background = "";
 
     loader->PrepareTrainingAndTestTree( mycut_signal, mycut_background,
-        "nTrain_Signal=0:nTrain_Background=0:SplitMode=Random:NormMode=NumEvents:!V" );
+                                        "nTrain_Signal=0:nTrain_Background=0:SplitMode=Random:NormMode=NumEvents:!V" );
 
     TString cvOptions = "!V:!Silent:ModelPersistence:AnalysisType=Classification:NumFolds=3";
-        ":SplitExpr=""";
+    ":SplitExpr=""";
     auto cv = new TMVA::CrossValidation("TMVACrossValidation", loader, outputFile, cvOptions);
 
     // Use a kernel density estimator to approximate the PDFs
@@ -63,9 +63,9 @@ void extra_TMVA_kfolder()
     result.GetROCCurves()->Draw("AL");
     c->BuildLegend();
     c->Draw();
-	c->Print("../plotdir/D2KSPiPiPi_DD/TMVA_out_DD_kfold.pdf");
-    std::cout << "Average ROC Integral = " << result.GetROCAverage() 
-          << " +/- " << result.GetROCStandardDeviation()/sqrt(cv->GetNumFolds()) << std::endl;
+    c->Print("../plotdir/D2KSPiPiPi_DD/TMVA_out_DD_kfold.pdf");
+    std::cout << "Average ROC Integral = " << result.GetROCAverage()
+              << " +/- " << result.GetROCStandardDeviation()/sqrt(cv->GetNumFolds()) << std::endl;
     outputFile->Close();
 
 

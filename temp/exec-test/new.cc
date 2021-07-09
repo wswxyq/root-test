@@ -18,7 +18,7 @@
 
 using namespace RooFit ;
 using namespace std;
-void ll(){
+void ll() {
     TFile f("tree.root");
     TTree *datatree = (TTree*)(f.Get("MyTree"));
     TBranch *branch = datatree->GetBranch("B_M");
@@ -28,9 +28,9 @@ void ll(){
     RooRealVar m("B_M","mass",5300., 5450.);
     RooArgSet m_arg(m,"m_args");
     RooDataSet * dataset = new RooDataSet("dataset","dataset",m_arg);
-    for(int i=0;i<datatree->GetEntries();i++){
+    for(int i=0; i<datatree->GetEntries(); i++) {
         datatree->GetEvent(i);
         m = mass[0];
         dataset->add(m_arg,1.0);
-        }
+    }
 }

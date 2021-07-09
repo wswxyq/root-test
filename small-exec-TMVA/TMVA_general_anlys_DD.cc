@@ -1,5 +1,5 @@
 //analyse result from TMVA_general*.cc on overtraining etc.
-#include <iostream> 
+#include <iostream>
 #include "TMVA/mvas.h"
 void TMVA_general_anlys_DD()
 {

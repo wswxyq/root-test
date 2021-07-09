@@ -1,4 +1,4 @@
-#include <iostream> 
+#include <iostream>
 #include "TROOT.h"
 #include "TCanvas.h"
 #include "TH1.h"
@@ -26,7 +26,7 @@ using namespace RooStats ;
 using namespace std;
 using namespace RooFit;
 
-int fitPipi_wSplot(){
+int fitPipi_wSplot() {
 
     TChain *chain= new TChain("chain");
     chain->Add("D02pipi.root");
@@ -34,11 +34,11 @@ int fitPipi_wSplot(){
     int nbins=100;
 
     //////////////////////////////////add variable and cut
-    RooRealVar mass("D0_M", "mass D^{0}", 1810, 1920, "MeV"); 
+    RooRealVar mass("D0_M", "mass D^{0}", 1810, 1920, "MeV");
     RooRealVar pione_ProbNNk("pione_ProbNNk", "pione_ProbNNk", 0, 1);
     RooRealVar pitwo_ProbNNk("pitwo_ProbNNk", "pitwo_ProbNNk", 0, 1);
     RooRealVar pione_ProbNNpi("pione_ProbNNpi", "pione_ProbNNpi", 0, 1);
-    RooRealVar pitwo_isMuon("pitwo_isMuon", "pitwo_isMuon"  ,0,1);
+    RooRealVar pitwo_isMuon("pitwo_isMuon", "pitwo_isMuon",0,1);
     RooRealVar pitwo_ProbNNmu("pitwo_ProbNNmu", "pitwo_ProbNNmu", 0, 1);
 
 
@@ -46,13 +46,13 @@ int fitPipi_wSplot(){
     variables.add(RooArgSet(pitwo_isMuon, pitwo_ProbNNmu));
     //////////////////////////////////
     //Peak component
-    RooRealVar mean1("mean1","mean1",1860.5); 
+    RooRealVar mean1("mean1","mean1",1860.5);
     RooRealVar sigma1("sigma1","sigma1",23.5) ;
     RooRealVar a1("a1", "a1", 1.61);
     RooRealVar n1("n1", "n1", 0.33);
     RooCBShape gauss1("gauss1", "gauss1", mass, mean1, sigma1, a1, n1);
 
-    RooRealVar mean2("mean2","mean2",1865.8); 
+    RooRealVar mean2("mean2","mean2",1865.8);
     RooRealVar sigma2("sigma2","sigma2",8.33) ;
     RooGaussian gauss2("gauss2", "gauss2", mass, mean2, sigma2);
 
@@ -67,7 +67,7 @@ int fitPipi_wSplot(){
 
     //////////////////////////////////
     //Kpi component
-    RooRealVar mean3("mean3","mean3",1700); 
+    RooRealVar mean3("mean3","mean3",1700);
     RooRealVar sigma3("sigma3","sigma3",28.3) ;
     RooGaussian Kpi_PDF("Kpi_PDF", "Kpi_PDF", mass, mean3, sigma3);
 
@@ -89,14 +89,14 @@ int fitPipi_wSplot(){
 
     std::cout << "Check SWeights:" << std::endl;
     std::cout << std::endl <<  "Yield of pipi is "
-    << Npipi.getVal() << ".  From sWeights it is "
-    << sData->GetYieldFromSWeight("Npipi") << std::endl;
+              << Npipi.getVal() << ".  From sWeights it is "
+              << sData->GetYieldFromSWeight("Npipi") << std::endl;
     std::cout << std::endl <<  "Yield of kpi is "
-    << Nkpi.getVal() << ".  From sWeights it is "
-    << sData->GetYieldFromSWeight("Nkpi") << std::endl;
+              << Nkpi.getVal() << ".  From sWeights it is "
+              << sData->GetYieldFromSWeight("Nkpi") << std::endl;
     std::cout << std::endl <<  "Yield of komb is "
-    << Nkomb.getVal() << ".  From sWeights it is "
-    << sData->GetYieldFromSWeight("Nkomb") << std::endl;
+              << Nkomb.getVal() << ".  From sWeights it is "
+              << sData->GetYieldFromSWeight("Nkomb") << std::endl;
 
 
 
@@ -123,7 +123,7 @@ int fitPipi_wSplot(){
     dataw_kpi->plotOn(frame4,DataError(RooAbsData::SumW2) ) ;
     cdata->cd(3);
     frame4->Draw();
-    
+
     cdata->Print("/eos/user/t/tnanut/D02mumu/plots/sPlot_ProbNNmu.pdf");
 
     return 0;

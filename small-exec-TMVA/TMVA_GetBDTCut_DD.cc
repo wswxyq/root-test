@@ -37,7 +37,7 @@ void TMVA_GetBDTCut_DD()
 
     //set origin file used to train
     TString fname = "../saved/TMVA_root_files/reduced_DD_1.root";
-    TFile * input = new TFile( fname ); 
+    TFile * input = new TFile( fname );
 
 
     Float_t var[8];
@@ -48,7 +48,7 @@ void TMVA_GetBDTCut_DD()
     reader->AddVariable( "D_ReFit_chi2", &var[4] );
     reader->AddVariable( "KS_PT", &var[7] );
     reader->AddVariable( "var1:=D_ReFit_decayLength/D_ReFit_decayLengthErr", &var[5] );
-	reader->AddVariable( "var2:=log(D_IPCHI2_OWNPV)", &var[6] );	
+    reader->AddVariable( "var2:=log(D_IPCHI2_OWNPV)", &var[6] );
 
 
     // Book the MVA methods
@@ -70,7 +70,7 @@ void TMVA_GetBDTCut_DD()
     // output files
     TFile *target  = new TFile( "../saved/TMVA_root_files/TMVApp_DDx.root","RECREATE" );
     TTree *tree = theTree->CopyTree("");    //use this tree to calculate BDT cut
-    
+
     Double_t BDT_response;
     TBranch *BDT_response_branch = tree->Branch("BDT_response", &BDT_response, "BDT_response/D");
     Double_t Ct;
@@ -87,20 +87,20 @@ void TMVA_GetBDTCut_DD()
     theTree->SetBranchAddress( "D_ReFit_chi2", &userVarf[0] );
     theTree->SetBranchAddress( "D_ReFit_decayLength", &userVarf[2] );
     theTree->SetBranchAddress( "D_ReFit_decayLengthErr", &userVarf[3] );
-	theTree->SetBranchAddress( "D_IPCHI2_OWNPV", &userVard[4] );	
+    theTree->SetBranchAddress( "D_IPCHI2_OWNPV", &userVard[4] );
     theTree->SetBranchAddress( "KS_PT", &userVard[5] );
 
 
 
-    
+
     TStopwatch sw;
     // calculate BDT for tree
     sw.Start();
-    for (Long64_t ievt=0; ievt<theTree->GetEntries();ievt++) {
+    for (Long64_t ievt=0; ievt<theTree->GetEntries(); ievt++) {
         //if (ievt%1000 == 0) std::cout << "--- ... Processing event: " << ievt << std::endl;
-        
 
-        
+
+
         theTree->GetEntry(ievt);
         var[0]=userVard[0];
         var[1]=userVard[1];
@@ -123,12 +123,13 @@ void TMVA_GetBDTCut_DD()
 
         }
 
-        
+
     }
 
     // Get elapsed time
     sw.Stop();
-    std::cout << "--- End of event loop: "; sw.Print();
+    std::cout << "--- End of event loop: ";
+    sw.Print();
 
 
     target->cd();
@@ -137,7 +138,7 @@ void TMVA_GetBDTCut_DD()
 
 
     //calculate significance
-    
+
     Double_t cut_up=tree->GetMaximum("BDT_response");
     Double_t cut_down=tree->GetMinimum("BDT_response");
 
@@ -152,35 +153,35 @@ void TMVA_GetBDTCut_DD()
     Double_t temp_sig=0.;
     Double_t temp_bkg=0.;
 
-	RooRealVar D_M("D_M", "D+ mass", 1779.65, 1959.65, "MeV") ;
+    RooRealVar D_M("D_M", "D+ mass", 1779.65, 1959.65, "MeV") ;
     RooRealVar mean("mean","mean of gaussian",1869.,1859.,1879.) ;
-	RooRealVar mean_1("mean_1","mean of gaussian(1)",1869.,1859.,1879.) ;
-	RooRealVar sigma("sigma","width of gaussian",10.,0.1,20.) ;
-	RooRealVar sigma_1("sigma_1","width of gaussian(1)",20.,0.1,30.) ;
-	RooGaussian gauss("gauss","gaussian PDF", D_M, mean, sigma) ;  
-	RooGaussian gauss_1("gauss_1","gaussian PDF(1)", D_M, mean_1, sigma_1) ;  
-	RooRealVar gauss_frac("gauss_frac","fraction of component 1 in signal",0.8,0.,1.) ;
-	RooAddPdf gauss_all("gauss_all", "combination of gaussian function", RooArgList(gauss, gauss_1), RooArgList(gauss_frac));
+    RooRealVar mean_1("mean_1","mean of gaussian(1)",1869.,1859.,1879.) ;
+    RooRealVar sigma("sigma","width of gaussian",10.,0.1,20.) ;
+    RooRealVar sigma_1("sigma_1","width of gaussian(1)",20.,0.1,30.) ;
+    RooGaussian gauss("gauss","gaussian PDF", D_M, mean, sigma) ;
+    RooGaussian gauss_1("gauss_1","gaussian PDF(1)", D_M, mean_1, sigma_1) ;
+    RooRealVar gauss_frac("gauss_frac","fraction of component 1 in signal",0.8,0.,1.) ;
+    RooAddPdf gauss_all("gauss_all", "combination of gaussian function", RooArgList(gauss, gauss_1), RooArgList(gauss_frac));
 
-	RooRealVar x1("x1", "para1", 0., 100.);
-	RooRealVar x2("x2", "para2", 0., 100.);
-	RooRealVar x3("x3", "para3", 0., 100.);
-	RooPolynomial poly("poly", "3-para-poly", D_M, RooArgList(x1, x2, x3),0);
+    RooRealVar x1("x1", "para1", 0., 100.);
+    RooRealVar x2("x2", "para2", 0., 100.);
+    RooRealVar x3("x3", "para3", 0., 100.);
+    RooPolynomial poly("poly", "3-para-poly", D_M, RooArgList(x1, x2, x3),0);
 
-	RooRealVar gauss_poly_frac("gauss_poly_frac","fraction of signal",0.,100000.) ;
-	RooRealVar gauss_poly_frac_1("gauss_poly_frac_1","fraction of background",0.,300000.) ;
-	RooAddPdf event("even","event",RooArgList(gauss_all, poly), RooArgList(gauss_poly_frac, gauss_poly_frac_1)) ;
+    RooRealVar gauss_poly_frac("gauss_poly_frac","fraction of signal",0.,100000.) ;
+    RooRealVar gauss_poly_frac_1("gauss_poly_frac_1","fraction of background",0.,300000.) ;
+    RooAddPdf event("even","event",RooArgList(gauss_all, poly), RooArgList(gauss_poly_frac, gauss_poly_frac_1)) ;
 
     RooRealVar BDT_value("BDT_response", "BDT_response", -1000, 1000);
-	RooArgSet variables(D_M, BDT_value); 
-    
+    RooArgSet variables(D_M, BDT_value);
+
 
     for(Long64_t i = 0; i < num_cut; i++)
     {
         cut_value[i] = cut_down + (cut_up-cut_down)*i/num_cut;
         string bdtcut="BDT_response>";
         bdtcut+=to_string(cut_value[i]);
-        
+
         RooDataSet *ds=new RooDataSet("ds_plus", "ds_plus", variables, Import(*tree), Cut(bdtcut.c_str()));
         event.fitTo(*ds, NumCPU(10));
         temp_sig=gauss_poly_frac.getVal()*kk_signal_yield/kp_signal_yield;
@@ -190,11 +191,11 @@ void TMVA_GetBDTCut_DD()
 
         //std::cout<<cut_value[i]<<"   "<<sum_sweight<<"   "<<sum_bweight
         //<<" "<<significance_value[i]<<std::endl;
-        
+
     }
 
 
-    
+
     TCanvas *c1 = new TCanvas("c1","A Simple Graph Example",200,10,700,500);
     c1->SetFillColor(42);
     c1->SetGrid();
@@ -223,13 +224,13 @@ void TMVA_GetBDTCut_DD()
     Double_t bestcut;
     bestcut=cut_value[distance(significance_value, max_element(significance_value, significance_value + num_cut))];
     cout    << "The best BDT cut value: "<<  bestcut  << endl;
-	
+
     for(int ii = 0; ii < num_cut; ii++)
     {
         cout<<cut_value[ii]<<"  "<<significance_value[ii]<<endl;
     }
-    
 
 
-    }
+
+}
 
